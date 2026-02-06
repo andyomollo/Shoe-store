@@ -1,11 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soletread</title>
-</head>
-<body>
-    <h1>Hello Welcome to Soletread</h1>
-</body>
-</html>
+{% extends 'Soletread/base.html' %}
+{% load static %}
+
+{% block title %}Soletread - Browse Sneakers{% endblock %}
+
+{% block extra_css %}
+<!-- Load index-specific CSS -->
+<link rel="stylesheet" href="{% static 'Soletread/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1 class="page-title">🔥 Browse Premium Sneakers 🔥</h1>
+
+<div class="sneaker-grid">
+    {% for sneaker in sneakers %}
+    <div class="sneaker-card">
+        <h3>{{ sneaker.brand_name }} {{ sneaker.model_name }}</h3>
+        <p><strong>Colorway:</strong> {{ sneaker.colorway }}</p>
+        <p><strong>Size:</strong> {{ sneaker.size }} {{ sneaker.size_type }}</p>
+        <p><strong>Year:</strong> {{ sneaker.release_year }}</p>
+        <p>
+            <span class="condition {% if sneaker.is_sold %}sold{% endif %}">
+                {% if sneaker.is_sold %}SOLD{% else %}{{ sneaker.get_condition_display }}{% endif %}
+            </span>
+        </p>
+        <p class="price">${{ sneaker.price }}</p>
+        <p>{{ sneaker.description|truncatewords:20 }}</p>
+    </div>
+    {% empty %}
+    <p>No sneakers available yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

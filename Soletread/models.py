@@ -49,7 +49,7 @@ class Sneaker(models.Model):
 
 
     def __str__(self):
-        return f"{self.brand_name} {self.model_name} - {self.colorway}"
+        return f"{self.brand_name} {self.model_name} - {self.colorway}" #Nike Air Jordans - Navy-blue
     
     class Meta: #The Meta class should be after all the field definitions, not before.
         ordering = ['-date_listed', 'model_name']
