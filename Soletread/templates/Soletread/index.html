@@ -1,19 +1,25 @@
 {% extends 'Soletread/base.html' %}
 {% load static %}
 
-{% block title %}Soletread - Browse{% endblock %}
+{% block title %}Soletread{% endblock %}
 
 {% block extra_css %}
 
-<link rel="stylesheet" href="{% static 'Soletread/index.css' %}">
+<link rel="stylesheet" href="{% static 'Soletread/css/index.css' %}">
 {% endblock %}
 
 {% block content %}
-<h1 class="page-title">🔥 Browse Premium Sneakers 🔥</h1>
 
 <div class="sneaker-grid">
     {% for sneaker in sneakers %}
     <div class="sneaker-card">
+
+        {% if sneaker.image %}
+        <img src="{{ sneaker.image.url }}" alt="{{ sneaker.model_name }}">
+        {% else %}
+        <div class="no-image">No Image</div>
+        {% endif %}
+        
         <h3>{{ sneaker.brand_name }} {{ sneaker.model_name }}</h3>
         <p><strong>Colorway:</strong> {{ sneaker.colorway }}</p>
         <p><strong>Size:</strong> {{ sneaker.size }} {{ sneaker.size_type }}</p>
